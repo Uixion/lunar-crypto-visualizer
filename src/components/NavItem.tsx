@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface NavItemProps {
   icon: LucideIcon;
@@ -10,28 +10,18 @@ interface NavItemProps {
   onClick?: () => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ 
-  icon: Icon, 
-  label, 
-  active = false,
-  onClick
-}) => {
+const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, active = false, onClick }) => {
   return (
-    <button
-      onClick={onClick}
+    <div 
       className={cn(
-        "flex items-center w-full px-4 py-3 mb-1 rounded-xl transition-smooth",
-        active 
-          ? "bg-crypto-accent text-white glow-effect" 
-          : "text-gray-400 hover:bg-white/5"
+        "flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 hover:bg-white/10",
+        active ? "bg-white/10 text-white shadow-[0_0_10px_rgba(255,255,255,0.1)]" : "text-gray-400"
       )}
+      onClick={onClick}
     >
-      <Icon className="h-5 w-5 mr-3" />
+      <Icon className={cn("h-5 w-5", active ? "text-crypto-accent" : "")} />
       <span className="font-medium">{label}</span>
-      {active && (
-        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-white" />
-      )}
-    </button>
+    </div>
   );
 };
 
