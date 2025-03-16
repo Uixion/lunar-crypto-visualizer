@@ -1,38 +1,38 @@
 
 /**
- * Format a number as currency
- * @param value Number to format
- * @param decimals Number of decimal places
- * @param compact Whether to compact large numbers (e.g., 1.2B)
- * @returns Formatted string
+ * Formata um número como moeda
+ * @param value Número para formatar
+ * @param decimals Número de casas decimais
+ * @param compact Se deve compactar números grandes (ex: 1,2B)
+ * @returns String formatada
  */
 export const formatCurrency = (
   value: number, 
   decimals: number = 2,
   compact: boolean = false
 ): string => {
-  const formatter = new Intl.NumberFormat('en-US', {
+  const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'BRL',
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
     notation: compact ? 'compact' : 'standard',
     compactDisplay: 'short'
   });
   
-  // For very small values like in cryptocurrencies
+  // Para valores muito pequenos como em criptomoedas
   if (value < 0.01 && value > 0) {
-    return '$' + value.toFixed(6);
+    return 'R$' + value.toFixed(6);
   }
   
   return formatter.format(value);
 };
 
 /**
- * Format a large number with commas
- * @param value Number to format
- * @returns Formatted string
+ * Formata um número grande com vírgulas
+ * @param value Número para formatar
+ * @returns String formatada
  */
 export const formatNumber = (value: number): string => {
-  return new Intl.NumberFormat().format(value);
+  return new Intl.NumberFormat('pt-BR').format(value);
 };

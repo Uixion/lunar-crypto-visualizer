@@ -15,7 +15,7 @@ const DetailedChart: React.FC = () => {
   if (!selectedCrypto) {
     return (
       <div className="glass-card rounded-2xl p-6 h-[400px] flex items-center justify-center">
-        <p className="text-gray-400">Select a cryptocurrency to view detailed chart</p>
+        <p className="text-gray-400">Selecione uma criptomoeda para ver o gráfico detalhado</p>
       </div>
     );
   }
@@ -95,11 +95,11 @@ const DetailedChart: React.FC = () => {
                 : <ArrowDown size={12} className="absolute -top-1 -right-1 text-red-400 p-0.5 bg-red-400/20 rounded-full" />
               }
             </div>
-            {selectedCrypto.name} Price Chart
+            Gráfico de Preço de {selectedCrypto.name}
           </h2>
           <div className="flex items-center">
             <p className="text-gray-400 mr-2">
-              Current Price: <span className="text-white font-medium">{formatCurrency(selectedCrypto.current_price)}</span>
+              Preço Atual: <span className="text-white font-medium">{formatCurrency(selectedCrypto.current_price)}</span>
             </p>
             <div className={`flex items-center ${priceChangeColor} px-2 py-0.5 rounded-full ${isPositive ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
               {priceChangeIcon}
@@ -153,8 +153,8 @@ const DetailedChart: React.FC = () => {
               width={80}
             />
             <Tooltip 
-              formatter={(value: number) => [formatCurrency(value), 'Price']}
-              labelFormatter={(label) => `Time: ${label}`}
+              formatter={(value: number) => [formatCurrency(value), 'Preço']}
+              labelFormatter={(label) => `Tempo: ${label}`}
               contentStyle={{ 
                 backgroundColor: 'rgba(15, 23, 42, 0.9)', 
                 borderColor: isPositive ? 'rgba(52, 211, 153, 0.3)' : 'rgba(239, 68, 68, 0.3)',

@@ -7,14 +7,14 @@ const Header: React.FC = () => {
     <header className="glass-card rounded-2xl px-6 py-4 mb-6 flex justify-between items-center animate-fade-in">
       <div className="flex items-center space-x-3">
         <Bitcoin className="h-8 w-8 text-crypto-accent" />
-        <h1 className="text-2xl font-bold glow-text">CryptoVision</h1>
+        <h1 className="text-2xl font-bold glow-text">CriptoVisão</h1>
       </div>
       
       <div className="hidden md:flex items-center glass-card rounded-full px-4 py-2 text-gray-400 w-72">
         <Search className="h-4 w-4 mr-2" />
         <input
           type="text"
-          placeholder="Search cryptocurrencies..."
+          placeholder="Buscar criptomoedas..."
           className="bg-transparent border-none outline-none w-full text-white"
         />
       </div>
@@ -27,7 +27,7 @@ const Header: React.FC = () => {
           <Settings className="h-5 w-5" />
         </button>
         <button className="hidden md:flex items-center space-x-2 px-4 py-2 text-sm font-medium bg-crypto-accent rounded-full hover:bg-opacity-90 transition-smooth">
-          <span>Connect Wallet</span>
+          <span>Conectar Carteira</span>
           <ChevronDown className="h-4 w-4" />
         </button>
         <button className="md:hidden p-2 rounded-full bg-white/5 hover:bg-white/10 transition-smooth">

@@ -28,21 +28,21 @@ const MarketStats: React.FC = () => {
   
   const stats = [
     {
-      title: 'Total Market Cap',
+      title: 'Capitalização Total',
       value: formatCurrency(totalMarketCap, 0, true),
       icon: <BarChart3 className="h-6 w-6 text-crypto-accent" />,
       color: 'from-crypto-accent/20 to-crypto-accent/5',
       pulsate: true
     },
     {
-      title: '24h Trading Volume',
+      title: 'Volume em 24h',
       value: formatCurrency(totalVolume, 0, true),
       icon: <Wallet className="h-6 w-6 text-crypto-binance" />,
       color: 'from-crypto-binance/20 to-crypto-binance/5',
       pulsate: false
     },
     {
-      title: 'Average 24h Change',
+      title: 'Variação Média 24h',
       value: `${avgChange > 0 ? '+' : ''}${avgChange.toFixed(2)}%`,
       icon: isPositiveAvgChange 
         ? <TrendingUp className="h-6 w-6 text-green-400 animate-bounce" /> 

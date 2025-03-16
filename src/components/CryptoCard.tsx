@@ -90,7 +90,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick, isSelected }) 
         )}>
           {formatCurrency(crypto.current_price)}
         </span>
-        <span className="text-sm text-gray-400">Market Cap: {formatCurrency(crypto.market_cap, 0, true)}</span>
+        <span className="text-sm text-gray-400">Cap. de Mercado: {formatCurrency(crypto.market_cap, 0, true)}</span>
       </div>
     </div>
   );

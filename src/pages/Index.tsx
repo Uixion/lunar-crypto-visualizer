@@ -26,9 +26,9 @@ const Index: React.FC = () => {
               
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <h2 className="text-xl font-bold">Top Cryptocurrencies</h2>
+                  <h2 className="text-xl font-bold">Principais Criptomoedas</h2>
                   <button className="text-crypto-accent hover:underline text-sm font-medium">
-                    View All
+                    Ver Todas
                   </button>
                 </div>
                 <CryptoList />
