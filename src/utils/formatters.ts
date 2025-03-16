@@ -49,7 +49,10 @@ export const highlightSearchMatch = (text: string, query: string): React.ReactNo
   const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
   const parts = text.split(regex);
   
+  // Usando React.createElement em vez de JSX
   return parts.map((part, i) => 
-    regex.test(part) ? <span key={i} className="bg-yellow-500/30">{part}</span> : part
+    regex.test(part) 
+      ? React.createElement('span', { key: i, className: "bg-yellow-500/30" }, part) 
+      : part
   );
 };
