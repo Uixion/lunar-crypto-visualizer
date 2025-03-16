@@ -36,3 +36,20 @@ export const formatCurrency = (
 export const formatNumber = (value: number): string => {
   return new Intl.NumberFormat('pt-BR').format(value);
 };
+
+/**
+ * Destaca texto de pesquisa em uma string
+ * @param text Texto a ser verificado
+ * @param query Termo de pesquisa
+ * @returns JSX com destaque para o termo pesquisado
+ */
+export const highlightSearchMatch = (text: string, query: string): React.ReactNode => {
+  if (!query.trim()) return text;
+  
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  const parts = text.split(regex);
+  
+  return parts.map((part, i) => 
+    regex.test(part) ? <span key={i} className="bg-yellow-500/30">{part}</span> : part
+  );
+};

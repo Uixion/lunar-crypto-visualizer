@@ -20,6 +20,11 @@ export interface CryptoContextType {
   setSelectedCrypto: (crypto: CryptoData | null) => void;
   timeRange: TimeRange;
   setTimeRange: (range: TimeRange) => void;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  isSearching: boolean;
+  setIsSearching: (isSearching: boolean) => void;
+  filteredCryptos: CryptoData[];
 }
 
 export type TimeRange = '1D' | '7D' | '1M' | '3M' | '1Y';

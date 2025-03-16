@@ -91,6 +91,8 @@ export const CryptoProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoData | null>(mockCryptoData[0]);
   const [timeRange, setTimeRange] = useState<TimeRange>('1D');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   // Simulate data fetching
   useEffect(() => {
@@ -102,6 +104,14 @@ export const CryptoProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }, 500);
   }, []);
 
+  // Search functionality
+  const filteredCryptos = searchTerm.trim() !== '' 
+    ? cryptos.filter(crypto => 
+        crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+
   return (
     <CryptoContext.Provider
       value={{
@@ -111,6 +121,11 @@ export const CryptoProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setSelectedCrypto,
         timeRange,
         setTimeRange,
+        searchTerm,
+        setSearchTerm,
+        isSearching,
+        setIsSearching,
+        filteredCryptos,
       }}
     >
       {children}
