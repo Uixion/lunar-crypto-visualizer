@@ -5,48 +5,65 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --radius: 0.5rem;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.85rem;
   }
 
-  .light-theme {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 98%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 98%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
@@ -54,129 +71,60 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black text-white antialiased;
   }
 }
 
-.navy-gradient-bg {
-  background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
-}
-
-.light-theme .navy-gradient-bg {
-  background: linear-gradient(135deg, #f0f8ff 0%, #e6f0ff 100%);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.light-theme .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-}
-
-.crypto-card {
-  @apply glass-card p-5 h-48 rounded-2xl relative overflow-hidden flex flex-col justify-between;
-}
-
-.light-theme .crypto-card {
-  border-left: 4px solid rgba(0, 0, 0, 0.1);
-}
-
-.glow-text {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.light-theme .glow-text {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.transition-smooth {
-  @apply transition duration-300 ease-in-out;
-}
-
-.shimmer-effect {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(90deg, #112240 25%, #1e3a6e 50%, #112240 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
+@layer utilities {
+  .glass-card {
+    @apply bg-black/40 backdrop-blur-lg border border-white/10 shadow-xl;
   }
-  100% {
-    background-position: -200% 0;
+  
+  .glow-effect {
+    @apply relative;
   }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
+  
+  .glow-effect::after {
+    content: '';
+    @apply absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-crypto-accent/30 to-crypto-navy-glow/30 opacity-0 transition duration-300 blur-xl;
+    z-index: -1;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .glow-effect:hover::after {
+    @apply opacity-100;
   }
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
+  
+  .glow-text {
+    @apply bg-gradient-to-r from-white to-crypto-accent-light bg-clip-text text-transparent;
   }
-  50% {
-    transform: translateY(-3px);
+  
+  .navy-gradient-bg {
+    background: radial-gradient(circle at 15% 50%, #132F4C 0%, transparent 25%),
+               radial-gradient(circle at 85% 30%, #132F4C 0%, transparent 25%),
+               radial-gradient(circle at 50% 80%, #1E4976 0%, transparent 20%);
+    background-color: #000000;
   }
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 1;
+  
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
   }
-  50% {
-    opacity: 0.7;
+  
+  .crypto-card {
+    @apply glass-card rounded-2xl p-5 transition-smooth hover:translate-y-[-5px];
   }
-  100% {
-    opacity: 1;
+  
+  .shimmer-effect {
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 75%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
   }
-}
-
-.light-theme .text-white {
-  @apply text-gray-800;
-}
-
-.light-theme .text-gray-400 {
-  @apply text-gray-600;
-}
-
-.light-theme .hover\:bg-white\/10:hover {
-  @apply hover:bg-black/5;
-}
-
-.light-theme .bg-white\/5 {
-  @apply bg-black/5;
-}
-
-.light-theme .bg-white\/10 {
-  @apply bg-black/10;
 }
