@@ -6,7 +6,6 @@ import Sidebar from '../components/Sidebar';
 import MarketStats from '../components/MarketStats';
 import CryptoList from '../components/CryptoList';
 import DetailedChart from '../components/DetailedChart';
-import { Link } from 'react-router-dom';
 
 const Index: React.FC = () => {
   return (
@@ -28,9 +27,9 @@ const Index: React.FC = () => {
               <div>
                 <div className="flex justify-between items-center mb-3">
                   <h2 className="text-xl font-bold">Principais Criptomoedas</h2>
-                  <Link to="/all-cryptos" className="text-crypto-accent hover:underline text-sm font-medium">
+                  <button className="text-crypto-accent hover:underline text-sm font-medium">
                     Ver Todas
-                  </Link>
+                  </button>
                 </div>
                 <CryptoList />
               </div>
