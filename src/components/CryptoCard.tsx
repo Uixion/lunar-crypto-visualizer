@@ -19,18 +19,26 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick, isSelected }) 
   return (
     <div 
       className={cn(
-        "crypto-card cursor-pointer animate-fade-in opacity-0",
-        isSelected && "ring-2 ring-crypto-accent/50"
+        "crypto-card cursor-pointer animate-fade-in opacity-0 relative overflow-hidden transition-all duration-300",
+        isSelected && "ring-2 ring-crypto-accent/50",
+        isPositive ? "hover:shadow-[0_0_15px_rgba(52,211,153,0.3)]" : "hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]"
       )}
       onClick={onClick}
-      style={{ animationDelay: `${Math.random() * 0.5}s` }}
+      style={{ 
+        animationDelay: `${Math.random() * 0.5}s`,
+        borderLeft: isPositive ? '4px solid rgb(52, 211, 153)' : '4px solid rgb(239, 68, 68)'
+      }}
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           <img 
             src={crypto.image} 
             alt={crypto.name} 
-            className="w-10 h-10 rounded-full object-contain bg-white/5 p-1"
+            className={cn(
+              "w-10 h-10 rounded-full object-contain p-1 transition-transform duration-500",
+              isPositive ? "bg-green-500/10" : "bg-red-500/10",
+              isPositive ? "animate-pulse" : ""
+            )}
             loading="lazy"
           />
           <div>
@@ -40,11 +48,16 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick, isSelected }) 
         </div>
         <div 
           className={cn(
-            "flex items-center gap-1 font-medium text-sm px-2 py-1 rounded-full",
-            isPositive ? "bg-green-500/10 text-green-400" : "bg-red-500/10 text-red-400"
+            "flex items-center gap-1 font-medium text-sm px-2 py-1 rounded-full transition-all duration-300",
+            isPositive 
+              ? "bg-green-500/20 text-green-400 shadow-[0_0_10px_rgba(52,211,153,0.3)]" 
+              : "bg-red-500/20 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]"
           )}
         >
-          {isPositive ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+          {isPositive 
+            ? <TrendingUp size={14} className="animate-bounce" /> 
+            : <TrendingDown size={14} className="animate-bounce" />
+          }
           <span>{isPositive ? "+" : ""}{crypto.price_change_percentage_24h.toFixed(2)}%</span>
         </div>
       </div>
@@ -54,14 +67,14 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick, isSelected }) 
           <AreaChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id={`gradient-${crypto.id}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={crypto.color} stopOpacity={0.5} />
-                <stop offset="100%" stopColor={crypto.color} stopOpacity={0} />
+                <stop offset="0%" stopColor={isPositive ? '#34D399' : '#EF4444'} stopOpacity={0.5} />
+                <stop offset="100%" stopColor={isPositive ? '#34D399' : '#EF4444'} stopOpacity={0} />
               </linearGradient>
             </defs>
             <Area 
               type="monotone" 
               dataKey="price" 
-              stroke={crypto.color}
+              stroke={isPositive ? '#34D399' : '#EF4444'}
               strokeWidth={2}
               fill={`url(#gradient-${crypto.id})`}
               animationDuration={1000}
@@ -71,7 +84,12 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ crypto, onClick, isSelected }) 
       </div>
       
       <div className="flex justify-between items-baseline">
-        <span className="text-2xl font-bold">{formatCurrency(crypto.current_price)}</span>
+        <span className={cn(
+          "text-2xl font-bold transition-all duration-300",
+          isPositive ? "text-green-400" : "text-red-400"
+        )}>
+          {formatCurrency(crypto.current_price)}
+        </span>
         <span className="text-sm text-gray-400">Market Cap: {formatCurrency(crypto.market_cap, 0, true)}</span>
       </div>
     </div>

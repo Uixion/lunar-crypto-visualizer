@@ -4,6 +4,7 @@ import { useCrypto } from '../context/CryptoContext';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { formatCurrency } from '../utils/formatters';
 import { TimeRange } from '../types/crypto';
+import { ArrowDown, ArrowUp, TrendingDown, TrendingUp } from 'lucide-react';
 
 const timeRanges: TimeRange[] = ['1D', '7D', '1M', '3M', '1Y'];
 
@@ -70,25 +71,42 @@ const DetailedChart: React.FC = () => {
   
   const chartData = generateExtendedData();
   const isPositive = selectedCrypto.price_change_percentage_24h >= 0;
+  const priceChangeColor = isPositive ? 'text-green-400' : 'text-red-400';
+  const priceChangeIcon = isPositive ? <TrendingUp className="animate-bounce mr-1" /> : <TrendingDown className="animate-bounce mr-1" />;
+  const chartColor = isPositive ? '#34D399' : '#EF4444';
   
   return (
     <div className="glass-card rounded-2xl p-6 animate-fade-in">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <img 
-              src={selectedCrypto.image} 
-              alt={selectedCrypto.name} 
-              className="w-8 h-8 rounded-full"
-            />
+            <div className="relative">
+              <img 
+                src={selectedCrypto.image} 
+                alt={selectedCrypto.name} 
+                className={cn(
+                  "w-8 h-8 rounded-full",
+                  isPositive ? "animate-pulse" : ""
+                )}
+              />
+              {isPositive 
+                ? <ArrowUp size={12} className="absolute -top-1 -right-1 text-green-400 p-0.5 bg-green-400/20 rounded-full" /> 
+                : <ArrowDown size={12} className="absolute -top-1 -right-1 text-red-400 p-0.5 bg-red-400/20 rounded-full" />
+              }
+            </div>
             {selectedCrypto.name} Price Chart
           </h2>
-          <p className="text-gray-400">
-            Current Price: <span className="text-white font-medium">{formatCurrency(selectedCrypto.current_price)}</span>
-            <span className={`ml-2 ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
-              {isPositive ? '+' : ''}{selectedCrypto.price_change_percentage_24h.toFixed(2)}%
-            </span>
-          </p>
+          <div className="flex items-center">
+            <p className="text-gray-400 mr-2">
+              Current Price: <span className="text-white font-medium">{formatCurrency(selectedCrypto.current_price)}</span>
+            </p>
+            <div className={`flex items-center ${priceChangeColor} px-2 py-0.5 rounded-full ${isPositive ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
+              {priceChangeIcon}
+              <span className="font-medium">
+                {isPositive ? '+' : ''}{selectedCrypto.price_change_percentage_24h.toFixed(2)}%
+              </span>
+            </div>
+          </div>
         </div>
         <div className="flex space-x-2">
           {timeRanges.map((range) => (
@@ -97,7 +115,7 @@ const DetailedChart: React.FC = () => {
               onClick={() => setTimeRange(range)}
               className={`px-3 py-1 rounded-full text-sm font-medium transition-smooth ${
                 timeRange === range 
-                  ? 'bg-crypto-accent text-white' 
+                  ? `bg-${isPositive ? 'green' : 'red'}-500/20 text-white shadow-[0_0_10px_${isPositive ? 'rgba(52,211,153,0.3)' : 'rgba(239,68,68,0.3)'}]` 
                   : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
             >
@@ -112,8 +130,8 @@ const DetailedChart: React.FC = () => {
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={selectedCrypto.color} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={selectedCrypto.color} stopOpacity={0} />
+                <stop offset="5%" stopColor={chartColor} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={chartColor} stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#132F4C" vertical={false} />
@@ -138,15 +156,17 @@ const DetailedChart: React.FC = () => {
               labelFormatter={(label) => `Time: ${label}`}
               contentStyle={{ 
                 backgroundColor: 'rgba(15, 23, 42, 0.9)', 
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: isPositive ? 'rgba(52, 211, 153, 0.3)' : 'rgba(239, 68, 68, 0.3)',
                 borderRadius: '0.5rem',
-                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.2)'
+                boxShadow: isPositive 
+                  ? '0 10px 15px -3px rgba(52, 211, 153, 0.2)' 
+                  : '0 10px 15px -3px rgba(239, 68, 68, 0.2)'
               }}
             />
             <Area 
               type="monotone" 
               dataKey="price" 
-              stroke={selectedCrypto.color} 
+              stroke={chartColor} 
               fillOpacity={1}
               fill="url(#colorPrice)"
               strokeWidth={2}
