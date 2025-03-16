@@ -5,6 +5,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { formatCurrency } from '../utils/formatters';
 import { TimeRange } from '../types/crypto';
 import { ArrowDown, ArrowUp, TrendingDown, TrendingUp } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const timeRanges: TimeRange[] = ['1D', '7D', '1M', '3M', '1Y'];
 
