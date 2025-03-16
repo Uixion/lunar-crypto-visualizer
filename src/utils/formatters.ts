@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 /**
  * Formata um número como moeda
  * @param value Número para formatar
